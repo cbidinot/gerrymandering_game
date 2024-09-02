@@ -1,7 +1,7 @@
 CMP = gcc
 MAIN = project
 FUNC = projectfunc
-EXEC = project
+EXEC = gerrymandering
 
 $(EXEC): $(FUNC).o $(MAIN).o 
 	$(CMP) $(FUNC).o $(MAIN).o gfx2.o -o $(EXEC) -lX11
