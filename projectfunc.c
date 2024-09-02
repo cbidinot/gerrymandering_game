@@ -387,7 +387,7 @@ int handleClick(GameTile board[][GRIDMAX], int x, int y, int boardSize,
       lastSelected->y = boardY;
 
       // Breaking up an already finished district
-    } else {
+    } else if (checkIfMiddle(board[boardY][boardX])) {
       board[boardY][boardX].state = standby;
       for (i = 0; i < DISTRICTSIZE - 1; i++) {
         board[board[boardY][boardX].district[i].y]
@@ -593,5 +593,24 @@ int checkCount(GameState state, int nDistricts) {
       }
     }
   }
+  return 0;
+}
+
+// Checks if a tile being removed from a district will leave other tiles within
+// it without adjacent neighbors
+int checkIfMiddle(GameTile tile) {
+  int i, j;
+
+  for (i = 0; i < DISTRICTSIZE - 2; i++)
+    for (j = i + 1; j < DISTRICTSIZE - 1; j++) {
+      if (tile.district[i].y == tile.district[j].y &&
+          (tile.district[i].x == tile.district[j].x + 1 ||
+           tile.district[i].x == tile.district[j].x - 1))
+        return 1;
+      if (tile.district[i].x == tile.district[j].x &&
+          (tile.district[i].y == tile.district[j].y + 1 ||
+           tile.district[i].y == tile.district[j].y - 1))
+        return 1;
+    }
   return 0;
 }

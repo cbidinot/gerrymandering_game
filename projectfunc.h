@@ -68,3 +68,4 @@ void finishDistrict(GameTile board[][GRIDMAX], int x, int y, GameState *state);
 void displayCount(GameState state, int boardSize);
 GameState startScreen(GameState state);
 int checkCount(GameState state, int nDistricts);
+int checkIfMiddle(GameTile tile);
